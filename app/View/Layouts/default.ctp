@@ -1,63 +1,69 @@
 <?php
 /**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       app.View.Layouts
  * @since         CakePHP(tm) v 0.10.0.1076
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
-$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
-
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
-</head>
-<body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
-		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
-			<p>
-				<?php echo $cakeVersion; ?>
-			</p>
-		</div>
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
-</body>
+    <head>
+        <?php echo $this->Html->charset(); ?>
+        <title>
+            <?php echo $cakeDescription ?>:
+            <?php echo $this->fetch('title'); ?>
+        </title>
+        <?php
+        echo $this->Html->meta('icon');
+        echo $this->fetch('meta');
+        ##GLOBAL STYLES##
+        echo $this->Html->css('/assets/bootstrap/css/bootstrap');
+        echo $this->Html->css('main');
+        echo $this->Html->css('theme');
+        echo $this->Html->css('MoneAdmin');
+        echo $this->Html->css('/assets/Font-Awesome/css/font-awesome');
+        ##END GLOBAL STYLES##    
+        ##PAGE LEVEL STYLES##
+        echo $this->Html->css('/assets/dataTables/dataTables.bootstrap');
+        ##END PAGE LEVEL  STYLES##
+        echo $this->fetch('css');
+        ##GLOBAL SCRIPTS##
+        echo $this->Html->script('/assets/jquery-2.0.3.min');
+        echo $this->Html->script('/assets/bootstrap/js/bootstrap.min');
+        echo $this->Html->script('/assets/modernizr-2.6.2-respond-1.1.0.min');
+        ##END GLOBAL SCRIPTS##
+        echo $this->fetch('script');
+        ?>
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="padTop53">
+        <!-- MAIN WRAPPER -->
+        <div id="wrap">
+            <!-- HEADER SECTION -->
+            <?php echo $this->element('header') ?>
+            <!-- END HEADER SECTION -->
+            <!-- MENU SECTION -->
+            <?php echo $this->element('left-menu') ?>
+            <!--END MENU SECTION -->
+            <!--PAGE CONTENT -->
+            <div id="content">
+                <div class="inner">
+                <?php echo $this->Session->flash(); ?>
+                <?php echo $this->fetch('content'); ?>
+                <!--END PAGE CONTENT -->
+                </div>
+            </div>
+        </div>
+        <!--END MAIN WRAPPER -->
+        <!-- FOOTER -->
+        <?php echo $this->element('footer') ?>
+        <!-- END FOOTER -->
+    </body>
 </html>
